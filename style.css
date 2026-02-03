@@ -1,0 +1,956 @@
+/* =========================================
+   1. GLOBAL VARIABLES & RESET (Үндсэн тохиргоо)
+   ========================================= */
+:root {
+    /* Үндсэн өнгөнүүд */
+    --primary-color: #3e2723;   /* Кофены гүн бор */
+    --secondary-color: #5d4037; /* Цайвар бор */
+    --accent-color: #d35400;    /* Улбар шар (Товчлуур гэх мэт) */
+    --bg-color: #fdf5e6;        /* Зөөлөн шаргал (Арын дэвсгэр) */
+    --white: #ffffff;
+    --text-color: #333333;
+    --light-gray: #f4f4f4;
+    --success: #27ae60;
+    --warning: #f39c12;
+    --shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. HEADER & NAVIGATION (Толгой хэсэг)
+   ========================================= */
+header {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(62, 39, 35, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-weight: 600;
+    font-size: 16px;
+    padding: 5px 0;
+    transition: 0.3s;
+    position: relative;
+    cursor: pointer;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+}
+
+/* Header Right Side */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login-nav-btn {
+    padding: 8px 25px;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.login-nav-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* =========================================
+   3. PAGE SECTIONS & HERO
+   ========================================= */
+.page-section {
+    display: none;
+    min-height: 100vh;
+    animation: fadeIn 0.6s ease-out;
+    padding-bottom: 50px;
+}
+
+.page-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* HERO SECTION */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1600');
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-btn {
+    padding: 15px 45px;
+    font-size: 18px;
+    background: #d7ccc8;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.cta-btn:hover {
+    background: var(--white);
+    transform: scale(1.05);
+}
+
+/* =========================================
+   4. MENU GRID
+   ========================================= */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 25px;
+    width: 95%;
+    max-width: 1600px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+@media (min-width: 1200px) {
+    .menu-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.menu-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(62, 39, 35, 0.15);
+}
+
+.card-image {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.menu-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-content {
+    padding: 20px;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card-content h3 {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+/* =========================================
+   5. ORDER MODAL (Popup for ordering)
+   ========================================= */
+#order-page {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-container {
+    position: relative;
+    width: 900px;
+    max-width: 95%;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.order-image-side {
+    flex: 1;
+    position: relative;
+    background: #000;
+}
+
+.order-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.order-info-side {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    z-index: 10;
+}
+
+.order-title {
+    font-size: 2.2rem;
+    color: #e0c097;
+    margin-bottom: 5px;
+}
+
+.order-price {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #444;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* Size Selectors */
+.size-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.size-box input {
+    display: none;
+}
+
+.size-box span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #444;
+    border-radius: 12px;
+    color: #888;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.size-box input:checked + span {
+    border-color: #e0c097;
+    background: #e0c097;
+    color: #000;
+}
+
+/* Quantity Control */
+.qty-control {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    background: #2a2a2a;
+    width: fit-content;
+    padding: 5px 15px;
+    border-radius: 30px;
+}
+
+.qty-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: #444;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#qtyInput {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    width: 40px;
+    text-align: center;
+}
+
+.order-btn {
+    background: linear-gradient(45deg, #d35400, #e67e22);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.order-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* =========================================
+   6. MODALS (Auth, Address, Payment)
+   ========================================= */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.auth-container, .modal-content {
+    background: white;
+    padding: 40px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: slideDown 0.4s;
+}
+
+@keyframes slideDown { 
+    from { transform: translateY(-50px); opacity: 0; } 
+    to { transform: translateY(0); opacity: 1; } 
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px; top: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.close-btn:hover { color: var(--accent-color); }
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #aaa;
+    position: relative;
+}
+
+.tab-btn.active { color: var(--primary-color); }
+.tab-btn.active::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--primary-color);
+}
+
+/* Auth & Address Forms Inputs */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.9rem;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* Login/Register Inputs */
+.input-group {
+    display: flex; align-items: center;
+    background: var(--light-gray);
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+.input-group input {
+    border: none; background: transparent; outline: none; width: 100%; margin-left: 10px;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.submit-btn:hover { background: var(--secondary-color); }
+
+.auth-form { display: none; }
+.auth-form.active-form { display: block; }
+
+/* Payment Methods */
+.payment-methods {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.pay-option {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+    transition: 0.3s;
+}
+.pay-option.selected {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* =========================================
+   7. PROFILE CONTAINER LAYOUT
+   ========================================= */
+.profile-container {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(111, 78, 55, 0.1);
+    overflow: hidden;
+    min-height: 500px;
+}
+
+/* --- SIDEBAR --- */
+.profile-sidebar {
+    flex: 1;
+    min-width: 250px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.user-badge {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.avatar-circle {
+    width: 80px;
+    height: 80px;
+    background: #6f4e37;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 2.5rem;
+    margin: 0 auto 15px;
+}
+
+.user-badge h3 {
+    color: #3e2723;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.user-badge p {
+    color: #8d6e63;
+    font-size: 0.9rem;
+}
+
+/* Menu Buttons */
+.profile-menu {
+    width: 100%;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 12px 20px;
+    margin-bottom: 8px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-size: 1rem;
+    color: #6d4c41;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-btn:hover {
+    background: #efebe9;
+}
+
+.menu-btn.active {
+    background: #d7ccc8;
+    color: #3e2723;
+    font-weight: 600;
+}
+
+.logout-btn-styled {
+    margin-top: 20px;
+    background-color: #e74c3c; /* Улаан өнгө */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+}
+.logout-btn-styled:hover {
+    background-color: #c0392b;
+}
+
+/* --- CONTENT AREA --- */
+.profile-content-area {
+    flex: 3; /* Баруун тал нь илүү өргөн байна */
+    display: flex;
+    flex-direction: column; /* Энэ код хэсгүүдийг доош нь цувруулна */
+    gap: 20px; /* Хоорондын зай */
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: #3e2723;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: #8d6e63;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* Form Styles inside Profile */
+.form-row {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+.readonly-input {
+    color: #999 !important;
+    cursor: not-allowed;
+}
+
+/* Save Button */
+.save-btn {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: #6f4e37;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.save-btn:hover {
+    background: #5d4037;
+}
+
+/* Tabs logic */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+.tab-content.active-content {
+    display: block;
+}
+
+/* =========================================
+   8. ORDER HISTORY STYLES (New additions)
+   ========================================= */
+.order-card {
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    transition: 0.3s;
+}
+
+.order-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+}
+
+.order-card.active-order {
+    border-left: 5px solid var(--accent-color);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.order-id {
+    display: block;
+    font-weight: bold;
+    color: #333;
+}
+.order-date {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-badge.pending {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.status-badge.completed {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.order-body p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.price-highlight {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+/* Address Box in Order History */
+.address-section {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.address-section.warning {
+    background: #fff8e1;
+    border: 1px dashed #ffb300;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.no-address {
+    color: #f39c12;
+    font-weight: 500;
+    margin-bottom: 0 !important;
+}
+
+.action-btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.address-btn {
+    background: #ffb300;
+    color: #fff;
+}
+.address-btn:hover { background: #f39c12; }
+
+.pay-btn {
+    background: var(--accent-color);
+    color: white;
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+}
+.pay-btn:hover { opacity: 0.9; }
+
+.view-btn {
+    background: #f5f5f5;
+    color: #666;
+    width: 100%;
+    margin-top: 10px;
+}
+.view-btn:hover { background: #eee; }
+
+.saved-address {
+    margin-top: 10px;
+    padding: 10px;
+    background: #fafafa;
+    border-radius: 8px;
+    border-left: 3px solid #d35400;
+}
+
+/* =========================================
+   9. RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 768px) {
+    header { flex-direction: column; padding: 15px; }
+    nav { margin: 15px 0; gap: 15px; flex-wrap: wrap; justify-content: center; }
+    .hero h1 { font-size: 2.5rem; }
+    
+    .order-container { flex-direction: column; height: 90vh; overflow-y: auto; display: flex; }
+    .order-image-side { height: 200px; flex: none; }
+    
+    .profile-container { flex-direction: column; height: auto; }
+    .profile-sidebar { width: 100%; border-right: none; border-bottom: 1px solid #eee; }
+    .profile-content-area { padding: 20px; }
+    
+    .address-section.warning { flex-direction: column; gap: 10px; text-align: center; }
+}
+/* Баталгаажуулах хуудасны загвар */
+body.verify-body {
+    background-color: #f3e5dc; /* Цайвар кофены өнгө */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.verify-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(111, 78, 55, 0.15); /* Бор сүүдэр */
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.verify-icon {
+    font-size: 3rem;
+    color: #6F4E37; /* Кофены бор өнгө */
+    margin-bottom: 20px;
+}
+
+.verify-title {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.verify-text {
+    color: #7f8c8d;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.verify-text b {
+    color: #6F4E37;
+}
+
+/* Код бичих хэсэг */
+.code-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 2rem;
+    text-align: center;
+    letter-spacing: 10px; /* Тоо хоорондын зай */
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    outline: none;
+    font-weight: bold;
+    color: #2c3e50;
+    transition: 0.3s;
+}
+
+.code-input:focus {
+    border-color: #6F4E37;
+    box-shadow: 0 0 0 4px rgba(111, 78, 55, 0.1);
+}
+
+/* Баталгаажуулах товч */
+.verify-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #6F4E37;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.verify-btn:hover {
+    background-color: #5a3e2b;
+    transform: translateY(-2px);
+}
+
+.error-msg {
+    background: #ffebee;
+    color: #c0392b;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}

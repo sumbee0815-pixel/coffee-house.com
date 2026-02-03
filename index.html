@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee House</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="showPage('home')" style="cursor: pointer;">CoffeeHouse</div>
+        <nav>
+            <a onclick="showPage('home')" class="nav-link active">Нүүр</a>
+            <a onclick="showPage('menu')" class="nav-link">Цэс</a>
+            <a onclick="showPage('about')" class="nav-link">Бидний тухай</a>
+            <a onclick="showPage('contact')" class="nav-link">Холбоо барих</a>
+        </nav>
+        <div class="header-right">
+            <button id="loginBtn" class="login-nav-btn" onclick="openAuthModal()">Нэвтрэх</button>
+            
+            <div id="userProfileIcon" style="display: none; cursor: pointer;" onclick="showPage('profile')">
+                <i class="fa-solid fa-user-circle" style="font-size: 24px; color: #6F4E37;"></i>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="page-section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Амьдралын амт<br>Нэг аяга кофенд</h1>
+                <p>Өглөөг эрч хүчтэй, өдрийг бүтээмжтэй өнгөрүүлэх нууц.</p>
+                <button class="cta-btn" onclick="showPage('menu')">Цэс үзэх</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="page-section">
+        <h2 style="text-align: center; margin: 40px 0; font-size: 2rem; color: #444;">Манай цэс</h2>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="goToOrder('Iced Latte', 12000, 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=600" alt="Iced Latte"></div>
+                <div class="card-content"><h3>Iced Latte</h3><p>12,000₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Cappuccino', 10000, 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600" alt="Cappuccino"></div>
+                <div class="card-content"><h3>Cappuccino</h3><p>10,000₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Mocha', 13500, 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" alt="Mocha"></div>
+                <div class="card-content"><h3>Mocha</h3><p>13,500₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Vanilla Cold Brew', 14000, 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=600" alt="Cold Brew"></div>
+                <div class="card-content"><h3>Vanilla Cold Brew</h3><p>14,000₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Caramel Macchiato', 12500, 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=600" alt="Macchiato"></div>
+                <div class="card-content"><h3>Caramel Macchiato</h3><p>12,500₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Dalgona Coffee', 11000, 'https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&w=600&q=80')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1589396575653-c09c794ff6a6?auto=format&fit=crop&w=600&q=80" alt="Dalgona Coffee"></div>
+                <div class="card-content"><h3>Dalgona Coffee</h3><p>11,000₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Americano', 8000, 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1551030173-122aabc4489c?w=600" alt="Americano"></div>
+                <div class="card-content"><h3>Americano</h3><p>8,000₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Espresso Double', 7000, 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600" alt="Espresso"></div>
+                <div class="card-content"><h3>Espresso</h3><p>7,000₮</p></div>
+            </div>
+            <div class="menu-card" onclick="goToOrder('Affogato', 15000, 'https://images.unsplash.com/photo-1599398054066-846f28917f38?w=600')">
+                <div class="card-image"><img src="https://images.unsplash.com/photo-1599398054066-846f28917f38?w=600" alt="Affogato"></div>
+                <div class="card-content"><h3>Affogato</h3><p>15,000₮</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="page-section">
+        <div class="container contact-wrapper">
+            <h2>Бидний тухай</h2>
+            <div class="contact-box" style="text-align: center; padding: 40px;">
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    Манай Coffee House нь 2024 оноос эхлэн үйл ажиллагаагаа явуулж байна.<br>
+                    Бид дэлхийн өнцөг булан бүрээс хамгийн шилдэг кофены үрийг авчирч, <br>
+                    танд давтагдашгүй амтыг мэдрүүлэхийг зорьдог.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="page-section">
+        <div class="container contact-wrapper">
+            <h2>Бидэнтэй холбогдох</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Таны санал хүсэлт бидэнд үнэтэй.</p>
+            <div class="contact-box">
+                <div class="contact-info" style="width: 100%; text-align: center;">
+                    <p><i class="fas fa-map-marker-alt"></i> Сүхбаатар дүүрэг, 1-р хороо, Blue Sky-н зүүн талд</p>
+                    <p><i class="fas fa-phone"></i> 7700-1234</p>
+                    <p><i class="fas fa-envelope"></i> info@coffeehouse.mn</p>
+                    <br>
+                    <p>Цагийн хуваарь: 08:00 - 22:00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="profile" class="page-section" style="display: none;">
+    <div class="profile-container">
+        
+        <div class="profile-sidebar">
+            <div class="user-badge">
+                <div class="avatar-circle">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="sidebarName">Хэрэглэгч</h3>
+                <p id="sidebarEmail">user@email.com</p>
+            </div>
+
+            <button id="logoutBtn" class="logout-btn-styled">
+                <i class="fas fa-sign-out-alt"></i> Гарах
+            </button>
+        </div>
+
+        <div class="profile-content-area">
+            
+            <div id="info" class="content-card">
+                <h2 class="section-title">Хувийн мэдээлэл</h2>
+                <h4 class="section-subtitle" style="margin-bottom: 20px; color: #666;">Үндсэн мэдээлэл</h4>
+                
+                <form id="profileUpdateForm" onsubmit="event.preventDefault(); alert('Profile update clicked!');">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Нэр</label>
+                            <input type="text" id="profileNameDisplay" placeholder="Таны нэр">
+                        </div>
+                        <div class="input-group">
+                            <label>Утасны дугаар</label>
+                            <input type="tel" id="profilePhoneDisplay" placeholder="9911xxxx">
+                        </div>
+                    </div>
+
+                    <div class="input-group full-width">
+                        <label>И-мэйл хаяг</label>
+                        <input type="email" id="profileEmailDisplay" readonly class="readonly-input">
+                        <small style="color: #888;">И-мэйл хаягийг солих боломжгүй.</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="save-btn">Хадгалах</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="history" class="content-card">
+                <h2 class="section-title">Миний захиалгууд</h2>
+                <div id="orderHistoryList">
+                    
+                    <div class="order-card active-order">
+                        <div class="order-header">
+                            <div>
+                                <span class="order-id">#ORD-2026-001</span>
+                                <span class="order-date">2026.02.01</span>
+                            </div>
+                            <span class="status-badge pending">Төлөгдөөгүй</span>
+                        </div>
+                        <div class="order-body">
+                            <p><strong>Бараа:</strong> Iced Latte (x2), Mocha (x1)</p>
+                            <p><strong>Нийт дүн:</strong> <span class="price-highlight">35,000₮</span></p>
+                            
+                            <div class="address-section warning" id="addr-box-001">
+                                <p class="no-address"><i class="fas fa-exclamation-circle"></i> Хүргэлтийн хаяг оруулаагүй байна!</p>
+                                <button class="action-btn address-btn" onclick="openAddressModal('001')">Хаяг нэмэх</button>
+                            </div>
+                            <div class="saved-address" id="saved-addr-001" style="display:none;">
+                                <p><i class="fas fa-map-marker-alt" style="color: #d35400;"></i> <span id="addr-text-001"></span></p>
+                            </div>
+                        </div>
+                        <div class="order-footer">
+                            <button class="action-btn pay-btn" id="pay-btn-001" onclick="openPaymentModal('001', 35000)">Төлбөр төлөх</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+    <div id="order-page" style="display: none;">
+        <div class="order-container">
+            <div class="order-image-side">
+                <button class="back-btn" onclick="backToMenu()">← Буцах</button>
+                <img id="orderImg" src="" alt="Coffee Image">
+            </div>
+            
+            <div class="order-info-side">
+                <h2 id="orderName" class="order-title">Coffee Name</h2>
+                <div id="orderPrice" class="order-price">0₮</div>
+                
+                <label style="color:#aaa; margin-bottom:10px; display:block;">Хэмжээ:</label>
+                <div class="size-selector">
+                    <label class="size-box">
+                        <input type="radio" name="size" value="S" onclick="updatePriceBySize()">
+                        <span>S</span>
+                    </label>
+                    <label class="size-box">
+                        <input type="radio" name="size" value="M" checked onclick="updatePriceBySize()">
+                        <span>M</span>
+                    </label>
+                    <label class="size-box">
+                        <input type="radio" name="size" value="L" onclick="updatePriceBySize()">
+                        <span>L</span>
+                    </label>
+                </div>
+
+                <label style="color:#aaa; margin-bottom:10px; display:block;">Тоо ширхэг:</label>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty(-1)">-</button>
+                    <input type="text" id="qtyInput" value="1" readonly>
+                    <button class="qty-btn" onclick="changeQty(1)">+</button>
+                </div>
+
+                <div style="margin-bottom: 20px; color: #aaa;">
+                    Нийт дүн: <span id="totalPriceDisplay" style="color: #e0c097; font-weight: bold; font-size: 1.4rem;">0₮</span>
+                </div>
+
+                <button class="order-btn" onclick="confirmOrder(event)">Захиалах</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="authModal" class="modal-overlay">
+        <div class="auth-container">
+            <span class="close-btn" onclick="closeAuthModal()">&times;</span>
+            
+            <div class="auth-tabs">
+                <button id="tabLogin" class="tab-btn active" onclick="switchTab('login')">Нэвтрэх</button>
+                <button id="tabRegister" class="tab-btn" onclick="switchTab('register')">Бүртгүүлэх</button>
+            </div>
+
+            <form id="loginForm" class="auth-form active-form" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i> <input type="email" id="loginEmail" placeholder="И-мэйл хаяг" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="Нууц үг" required>
+                </div>
+                <button type="submit" class="submit-btn">Нэвтрэх</button>
+            </form>
+
+            <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="regName" placeholder="Таны нэр" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="regEmail" placeholder="И-мэйл хаяг" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="regPassword" placeholder="Нууц үг" required>
+                </div>
+                <button type="submit" class="submit-btn">Бүртгүүлэх</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="address-modal" class="modal-overlay">
+        <div class="auth-container" style="max-width: 500px;">
+            <span class="close-btn" onclick="closeModal('address-modal')">&times;</span>
+            <h3 style="margin-bottom: 20px;">Хүргэлтийн хаяг оруулах</h3>
+            <input type="hidden" id="current-order-id">
+            <div class="form-group">
+                <label>Дүүрэг / Хороо</label>
+                <input type="text" id="district-input" placeholder="Жишээ нь: БЗД, 26-р хороо">
+            </div>
+            <div class="form-group">
+                <label>Дэлгэрэнгүй хаяг (Байр, орц)</label>
+                <input type="text" id="detail-input" placeholder="Жишээ нь: Parkside, 50-р байр, 1 тоот">
+            </div>
+            <div class="form-group">
+                <label>Утасны дугаар</label>
+                <input type="tel" placeholder="Утасны дугаар" value="9911-xxxx">
+            </div>
+            <button class="submit-btn" onclick="saveAddress()">Хадгалах</button>
+        </div>
+    </div>
+
+    <div id="payment-modal" class="modal-overlay">
+        <div class="auth-container" style="text-align: center;">
+            <span class="close-btn" onclick="closeModal('payment-modal')">&times;</span>
+            <h3 style="margin-bottom: 10px;">Төлбөр төлөх</h3>
+            <p style="color: #666; margin-bottom: 20px;">Захиалгын дүн: <strong id="pay-amount" style="color:#d35400; font-size: 1.2rem;">0₮</strong></p>
+            
+            <div class="payment-methods" style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                <div class="pay-option selected">QPay</div>
+                <div class="pay-option">SocialPay</div>
+                <div class="pay-option">Card</div>
+            </div>
+
+            <div style="background: #fff; border: 1px solid #ddd; width: 220px; height: 220px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; border-radius: 10px; padding: 10px;">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=CoffeeHouseOrderPayment" alt="QR Code" style="width: 100%;">
+            </div>
+
+            <button class="submit-btn" id="confirm-pay-btn" onclick="processPayment()">Төлбөр хийсэн</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
